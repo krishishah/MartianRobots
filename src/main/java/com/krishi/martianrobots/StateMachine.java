@@ -49,7 +49,7 @@ public class StateMachine {
                 if(isOffGridPosition(state.getCurrentPosition())) {
                     state.setLostState(true);
                     //Add last valid grid position to robotScent set
-                    robotScents.add(state.getPreviousPosition());
+                    addRobotScent(state.getPreviousPosition());
                     break;
                 }
             }
