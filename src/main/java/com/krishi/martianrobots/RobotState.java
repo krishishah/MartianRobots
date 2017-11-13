@@ -1,6 +1,7 @@
 package com.krishi.martianrobots;
 
 import java.awt.*;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import static com.krishi.martianrobots.Instruction.*;
@@ -17,9 +18,9 @@ public class RobotState {
     public RobotState(Orientation orientation, Point position) {
         this.orientation = orientation;
         this.currentPosition = position;
+        this.instructions = new LinkedList<>();
         this.isLost = false;
         this.previousPosition = null;
-        this.instructions = null;
     }
 
     public Orientation getOrientation() {
@@ -43,7 +44,7 @@ public class RobotState {
     }
 
     public void addInstructions(Queue<Instruction> instructions) {
-        this.instructions = instructions;
+        this.instructions.addAll(instructions);
     }
 
     public Instruction dequeueNextInstruction() {
@@ -53,7 +54,7 @@ public class RobotState {
 
 
     public boolean canExecuteNextInstruction() {
-        return instructions.size() > 0;
+        return (instructions.size() > 0);
     }
 
     public void executeNextInstruction() {

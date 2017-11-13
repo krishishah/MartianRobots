@@ -30,11 +30,45 @@ public class StateMachine {
     }
 
     public String triggerStateMachine() {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        for (RobotState state : robotStates) {
+            executeRobotInstructions(state);
+            sb.append(state.toString() + '\n');
+        }
+        return sb.toString();
     }
 
     private void executeRobotInstructions(RobotState state) {
-        
+
+        while(state.canExecuteNextInstruction()) {
+            if(isOnScentedPosition(state.getCurrentPosition())
+                    && isOffGridPosition(state.peekNextInstructionExecutionPositionResult())) {
+                state.dequeueNextInstruction();
+            } else {
+                state.executeNextInstruction();
+                if(isOffGridPosition(state.getCurrentPosition())) {
+                    state.setLostState(true);
+                    //Add last valid grid position to robotScent set
+                    robotScents.add(state.getPreviousPosition());
+                    break;
+                }
+            }
+        }
+    }
+
+    private boolean isOnScentedPosition(Point p) {
+        return getRobotScents().contains(p);
+    }
+
+    private boolean isOffGridPosition(Point p) {
+        return (p.x > gridBounds.x
+                || p.y > gridBounds.y
+                || p.x < 0
+                || p.y < 0);
+    }
+
+    private void addRobotScent(Point p) {
+        robotScents.add(p);
     }
 
 }
