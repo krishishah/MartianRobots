@@ -1,18 +1,32 @@
 package com.krishi.martianrobots;
 
 public enum Orientation {
-    N("NORTH"),
-    S("SOUTH"),
-    E("EAST"),
-    W("WEST");
+    N,
+    E,
+    S,
+    W;
 
-    private String orientation;
+    public static Orientation rotateClockwise(Orientation o) {
 
-    Orientation(String orientation) {
-        this.orientation = orientation;
+        switch(o) {
+            case N: return E;
+            case E: return S;
+            case S: return W;
+            case W: return N;
+        }
+
+        return null;
     }
 
-    public String getOrientation() {
-        return orientation;
+    public static Orientation rotateAntiClockwise(Orientation o) {
+
+        switch(o) {
+            case N: return W;
+            case E: return N;
+            case S: return E;
+            case W: return S;
+        }
+
+        return null;
     }
 }
