@@ -26,7 +26,6 @@ public class InputParserTests {
     public void cityParserShouldParseInitialRobotStatesCorrectly() {
         //Arrange
         InputParser parser = new InputParser("src/test/resources/test_input.txt");
-        Point expectedGridBounds = new Point(5, 3);
 
         //Act
         StateMachine stateMachine = parser.generateApplicationState();
@@ -44,15 +43,14 @@ public class InputParserTests {
         Assert.assertEquals(new Point(3, 2), r2.getCurrentPosition());
         Assert.assertEquals(Orientation.N, r2.getOrientation());
 
-        Assert.assertEquals(new Point(0, 3), r2.getCurrentPosition());
-        Assert.assertEquals(Orientation.W, r2.getOrientation());
+        Assert.assertEquals(new Point(0, 3), r3.getCurrentPosition());
+        Assert.assertEquals(Orientation.W, r3.getOrientation());
     }
 
     @Test
     public void cityParserShouldParseRobotInstructionsCorrectly() {
         //Arrange
         InputParser parser = new InputParser("src/test/resources/test_input.txt");
-        Point expectedGridBounds = new Point(5, 3);
 
         //Act
         StateMachine stateMachine = parser.generateApplicationState();
