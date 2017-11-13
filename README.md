@@ -84,5 +84,3 @@ java -jar build/libs/MartianRobots-1.0.jar test_input.txt
 ./gradlew test
 ```
 
-Problem: Martian Robots
-The Problem
